@@ -1,0 +1,13 @@
+﻿<Window x:Class="WindowSpam.DragAndDrop"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WindowSpam"
+        mc:Ignorable="d"
+        Title="DragAndDrop" Height="300" Width="300">
+	<Grid>
+		<local:DragUserControl HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="86" Loaded="DragUserControl_Loaded" Margin="83,60,0,0"/>
+
+	</Grid>
+</Window>

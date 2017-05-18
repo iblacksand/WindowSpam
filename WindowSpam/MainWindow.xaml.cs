@@ -36,8 +36,9 @@ namespace WindowSpam
         }
 
         private Window RandomWindow() {
+            return new DragAndDrop();
             Random rand = new Random();
-            int win = rand.Next(0, 2);
+            int win = rand.Next(0, 3);
             switch (win)
             {
                 case 0:
@@ -47,7 +48,7 @@ namespace WindowSpam
                     return new MakeSandwich();
                     break;
                 default:
-                    return new CutWire();
+                    return new DragAndDrop();
                     break;
             }
         }
