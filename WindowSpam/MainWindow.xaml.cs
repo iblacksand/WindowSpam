@@ -27,7 +27,7 @@ namespace WindowSpam
         private void spawnWindows()
         {
             int windowCount = Int16.Parse(WindowCounter.Text);
-            for(int i = 0; i < windowCount; i++)
+            for(int i = 0; i < 3; i++)
             {
                 Window x = RandomWindow();
                 x.Show();
@@ -36,7 +36,7 @@ namespace WindowSpam
         }
 
         private Window RandomWindow() {
-            return new DragAndDrop();
+            return new CutWire();
             Random rand = new Random();
             int win = rand.Next(0, 3);
             switch (win)

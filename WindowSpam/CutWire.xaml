@@ -6,7 +6,71 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WindowSpam.CutWire"
         mc:Ignorable="d"
         Title="Cut The Wire" Height="350" Width="525" ResizeMode="CanMinimize" Closing="Window_Closing">
-    <Grid>
-        
-    </Grid>
+	<Grid Cursor="Pen">
+		<Button x:Name="blueWire" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" Margin="43,39,0,0" Height="240" Background="#FF000EFF" Click="blueWire_Click">
+			<Button.Style>
+				<Style TargetType="{x:Type Button}">
+					<Setter Property="Background" Value="Green"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type Button}">
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="DarkGoldenrod"/>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+		</Button>
+		<Button x:Name="greenWire" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" Margin="238,45,0,0" Height="240" Background="#FF09FF00">
+			<Button.Style>
+				<Style TargetType="{x:Type Button}">
+					<Setter Property="Background" Value="Green"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type Button}">
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="DarkGoldenrod"/>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+		</Button>
+		<Button x:Name="RedWire" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" Margin="399,39,0,0" Height="240" Background="Red">
+			<Button.Style>
+				<Style TargetType="{x:Type Button}">
+					<Setter Property="Background" Value="Green"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type Button}">
+								<Border Background="{TemplateBinding Background}">
+									<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="DarkGoldenrod"/>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+		</Button>
+		<TextBlock x:Name="wireMessage" HorizontalAlignment="Left" Margin="222,11,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+
+	</Grid>
 </Window>
