@@ -26,7 +26,6 @@ namespace WindowSpam
         private bool IsGameOver;
         public CutWire()
         {
-            Background = BorderBrush(Colors.Red);
             IsComplete = false;
             InitializeComponent();
         }
