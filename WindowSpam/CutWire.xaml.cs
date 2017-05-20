@@ -31,8 +31,6 @@ namespace WindowSpam
             InitializeComponent();
         }
 
-        public 
-
         public void PopulateBoxes()
         {
             Random rand = new Random();
