@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,18 +23,29 @@ namespace WindowSpam
     {
         public static readonly int GameTime = 10;
         private int ToCut;
-        private bool IsComplete;
-        private bool IsGameOver;
+        public bool IsComplete;
+        public bool IsGameOver;
+        public bool CanClose;
         public CutWire()
         {
             IsComplete = false;
             InitializeComponent();
+            Background = Brushes.Red;
+        }
+
+        public void Start()
+        {
+            PopulateBoxes();
+            IsComplete = false;
+            Background = Brushes.Green;
+            SoundPlayer player = new SoundPlayer(@"Sounds\ding.wav");
+            player.PlaySync();
         }
 
         public void PopulateBoxes()
         {
             Random rand = new Random();
-            ToCut = rand.Next(0, 4);
+            ToCut = rand.Next(0, 3);
             String text = "";
             switch (ToCut)
             {
@@ -55,7 +67,7 @@ namespace WindowSpam
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true; 
+            e.Cancel = !CanClose; 
         }
 
         private void blueWire_Click(object sender, RoutedEventArgs e)
@@ -67,7 +79,41 @@ namespace WindowSpam
             else
             {
                 IsGameOver = true;
+                IsComplete = true;
             }
+        }
+
+        private void greenWire_Click(object sender, RoutedEventArgs e)
+        {
+            if (ToCut == 1)
+            {
+                IsComplete = true;
+            }
+            else
+            {
+                IsGameOver = true;
+                IsComplete = true;
+            }
+        }
+
+        private void RedWire_Click(object sender, RoutedEventArgs e)
+        {
+            if (ToCut == 2)
+            {
+                IsComplete = true;
+            }
+            else
+            {
+                IsGameOver = true;
+                IsComplete = true;
+                EndInit();
+            }
+        }
+
+        public void End()
+        {
+            Background = Brushes.Red;
+            CanClose = true;
         }
     }
 }

@@ -28,7 +28,7 @@
 				</Style>
 			</Button.Style>
 		</Button>
-		<Button x:Name="greenWire" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" Margin="238,45,0,0" Height="240" Background="#FF09FF00">
+		<Button x:Name="greenWire" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" Margin="238,45,0,0" Height="240" Background="#FF09FF00" Click="greenWire_Click">
 			<Button.Style>
 				<Style TargetType="{x:Type Button}">
 					<Setter Property="Background" Value="Green"/>
@@ -49,7 +49,7 @@
 				</Style>
 			</Button.Style>
 		</Button>
-		<Button x:Name="RedWire" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" Margin="399,39,0,0" Height="240" Background="Red">
+		<Button x:Name="RedWire" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" Margin="399,39,0,0" Height="240" Background="Red" Click="RedWire_Click">
 			<Button.Style>
 				<Style TargetType="{x:Type Button}">
 					<Setter Property="Background" Value="Green"/>

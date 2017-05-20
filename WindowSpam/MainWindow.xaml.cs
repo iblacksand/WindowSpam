@@ -13,7 +13,9 @@ namespace WindowSpam
     public partial class MainWindow : Window
     {
         System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
-        List<Window> gameWindows = new List<Window>();
+        private List<CutWire> cutList;
+        private List<MakeSandwich> sandList;
+        //private List<>
         public MainWindow()
         {
             InitializeComponent();
@@ -29,29 +31,15 @@ namespace WindowSpam
             int windowCount = Int16.Parse(WindowCounter.Text);
             for(int i = 0; i < 3; i++)
             {
-                Window x = RandomWindow();
-                x.Show();
-                gameWindows.Add(x);
+                
             }
+            CutWire x = new CutWire();
+            x.Show();
+            x.Start();
+            x.End();
+            x.Close();
         }
-
-        private Window RandomWindow() {
-            return new CutWire();
-            Random rand = new Random();
-            int win = rand.Next(0, 3);
-            switch (win)
-            {
-                case 0:
-                    return new CutWire();
-                    break;
-                case 1:
-                    return new MakeSandwich();
-                    break;
-                default:
-                    return new DragAndDrop();
-                    break;
-            }
-        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
