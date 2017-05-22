@@ -13,7 +13,7 @@
         <Button x:Name="baconButton" Content="Bacon" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,62,0,0" Click="baconButton_Click"/>
         <Button x:Name="lettuceButton" Content="Lettuce" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,277,0,0" Click="lettuceButton_Click"/>
         <Button x:Name="tomatoButton" Content="Tomato" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,222,0,0" Click="tomatoButton_Click"/>
-        <Button x:Name="bottomBunButton" Content="Bottom Bun" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,114,0,0" Click="bottomBunButton_Click"/>
+        <Button x:Name="bottomBunButton" Content="Bottom Bun" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,114,0,0" Click="bottomBunButton_Click_1"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="145,10,0,0" FontSize="20"><Run Text="Make a BLT top to "/><Run Text="bottom"/></TextBlock>
         <Image x:Name="bottomBunPicture" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="100" Margin="44,267,0,0" Source="Images/BottomBun.jpg" RenderTransformOrigin="1.47,0.98"/>
         <Image x:Name="topBunPicture" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="178" Margin="10,37,0,0" Source="Images/6.jpg"/>

@@ -28,6 +28,7 @@ namespace WindowSpam
         {
             counter = 0;
 
+
             topBunPicture.Visibility = Visibility.Hidden;
             baconPicture.Visibility = Visibility.Hidden;
             lettucePicture.Visibility = Visibility.Hidden;
@@ -58,6 +59,7 @@ namespace WindowSpam
             lettucePicture.Visibility = Visibility.Hidden;
             tomatoPicture.Visibility = Visibility.Hidden;
             bottomBunPicture.Visibility = Visibility.Hidden;
+
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -132,9 +134,9 @@ namespace WindowSpam
             }
         }
 
-        private void bottomBunButton_Click(object sender, RoutedEventArgs e)
+        private void bottomBunButton_Click_1(object sender, RoutedEventArgs e)
         {
-            int bottomBunNumber = 2;
+            int bottomBunNumber = 4;
             if (counter == bottomBunNumber)
             {
                 counter++;
