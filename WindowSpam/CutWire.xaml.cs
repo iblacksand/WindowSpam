@@ -32,6 +32,9 @@ namespace WindowSpam
             InitializeComponent();
             Background = Brushes.Yellow;
             wireMessage.Text = "";
+            RedWire.IsEnabled = false;
+            blueWire.IsEnabled = false;
+            greenWire.IsEnabled = false;
         }
 
         public void Start()
@@ -41,6 +44,9 @@ namespace WindowSpam
             Background = Brushes.Purple;
             SoundPlayer player = new SoundPlayer(@"Sounds\ding.wav");
             player.PlaySync();
+            RedWire.IsEnabled = true;
+            blueWire.IsEnabled = true;
+            greenWire.IsEnabled = true;
         }
 
         public void PopulateBoxes()
@@ -117,6 +123,14 @@ namespace WindowSpam
         {
             Background = Brushes.Yellow;
             CanClose = true;
+        }
+
+        public void Stop()
+        {
+            Background = Brushes.Yellow;
+            RedWire.IsEnabled = false;
+            blueWire.IsEnabled = false;
+            greenWire.IsEnabled = false;
         }
     }
 }
