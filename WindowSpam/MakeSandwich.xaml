@@ -7,16 +7,18 @@
         mc:Ignorable="d"
         Title="MakeSandwich" Height="350" Width="525" ResizeMode="CanMinimize" Closing="Window_Closing">
     <Grid>
-        <Button x:Name="topBunButton" Content="Top Bun" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,167,0,0" Click="Button_Click"/>
+        <Image x:Name="tomatoPicture" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="44,212,0,0" Source="Images/tomato2.jpg"/>
+
+        <Button x:Name="topBunButton" Content="Top Bun" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,167,0,0" Click="topBunButton_Click"/>
         <Button x:Name="baconButton" Content="Bacon" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,62,0,0" Click="baconButton_Click"/>
-        <Button x:Name="lettuceButton" Content="Lettuce" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,277,0,0"/>
-        <Button x:Name="tomatoButton" Content="Tomato" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,222,0,0"/>
-        <Button x:Name="bottomBunButton" Content="Bottom Bun" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,114,0,0"/>
+        <Button x:Name="lettuceButton" Content="Lettuce" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,277,0,0" Click="lettuceButton_Click"/>
+        <Button x:Name="tomatoButton" Content="Tomato" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,222,0,0" Click="tomatoButton_Click"/>
+        <Button x:Name="bottomBunButton" Content="Bottom Bun" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,114,0,0" Click="bottomBunButton_Click"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="145,10,0,0" FontSize="20"><Run Text="Make a BLT top to "/><Run Text="bottom"/></TextBlock>
-        <Image HorizontalAlignment="Left" Height="65" VerticalAlignment="Top" Width="100" Margin="44,122,0,0" Source="Images/bacon.png"/>
-        <Image HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="100" Margin="44,267,0,0" Source="Images/BottomBun.jpg" RenderTransformOrigin="1.47,0.98"/>
-        <Image HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="100" Margin="44,187,0,0" Source="Images/lettuce.jpg"/>
-        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="Images/TopBun.png" Margin="45,34,0,0"/>
+        <Image x:Name="bottomBunPicture" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="100" Margin="44,267,0,0" Source="Images/BottomBun.jpg" RenderTransformOrigin="1.47,0.98"/>
+        <Image x:Name="topBunPicture" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="178" Margin="10,37,0,0" Source="Images/6.jpg"/>
+        <Image x:Name="lettucePicture" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="100" Margin="44,154,0,0" Source="Images/lettuce.jpg"/>
+        <Image x:Name="baconPicture" HorizontalAlignment="Left" Height="65" VerticalAlignment="Top" Width="100" Margin="44,99,0,0" Source="Images/bacon.png"/>
 
     </Grid>
 </Window>

@@ -67,7 +67,10 @@ namespace WindowSpam
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SpawnWindows();
+            //SpawnWindows();
+            MakeSandwich x = new MakeSandwich();
+            x.Show();
+            x.Start(); 
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
