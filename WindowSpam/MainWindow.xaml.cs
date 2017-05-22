@@ -15,16 +15,45 @@ namespace WindowSpam
         System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
         private List<CutWire> cutList;
         private List<MakeSandwich> sandList;
+        private int gameDelay;
+        private int pauseTime;
+
+        private int lastCut;
+        private int lastNum;
+        private int lastWire;
         //private List<>
         public MainWindow()
         {
             InitializeComponent();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 5, 0);
-            timer.Start();
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e) { }
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if (gameDelay > 0)
+            {
+                gameDelay--;
+                return;
+            }
+            Random rand = new Random();
+            int nextGame = rand.Next(3);
+            if (nextGame == 0)
+            {
+                int nextWindow;
+                if (cutList.Count == 1)
+                {
+                    nextWindow = 0;
+                }
+                else
+                {
+                    DecideWindow1:
+                    nextWindow = rand.Next(cutList.Count);
+                    if (nextWindow == lastCut) goto DecideWindow1;
+                }
+
+            }
+        }
 
         private void SpawnWindows()
         {
@@ -64,13 +93,33 @@ namespace WindowSpam
             }
         }
 
+        private void end()
+        {
+            timer.Stop();
+            for (int i = 0; i < cutList.Count; i++)
+            {
+                cutList[i].End();
+                cutList[i].Close();
+            }
+
+            for (int i = 0; i < sandList.Count; i++)
+            {
+                sandList[i].End();
+                sandList[i].Close();
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //SpawnWindows();
-            MakeSandwich x = new MakeSandwich();
-            x.Show();
-            x.Start(); 
+            SpawnWindows();
+            pauseTime = 15;
+            gameDelay = pauseTime;
+            
+        }
+
+        public void start()
+        {
+            timer.Start();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
