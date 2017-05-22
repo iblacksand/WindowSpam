@@ -30,14 +30,15 @@ namespace WindowSpam
         {
             IsComplete = false;
             InitializeComponent();
-            Background = Brushes.Red;
+            Background = Brushes.Yellow;
+            wireMessage.Text = "";
         }
 
         public void Start()
         {
             PopulateBoxes();
             IsComplete = false;
-            Background = Brushes.Green;
+            Background = Brushes.Purple;
             SoundPlayer player = new SoundPlayer(@"Sounds\ding.wav");
             player.PlaySync();
         }
@@ -80,6 +81,7 @@ namespace WindowSpam
             {
                 IsGameOver = true;
                 IsComplete = true;
+                End();
             }
         }
 
@@ -93,6 +95,7 @@ namespace WindowSpam
             {
                 IsGameOver = true;
                 IsComplete = true;
+                End();
             }
         }
 
@@ -106,13 +109,13 @@ namespace WindowSpam
             {
                 IsGameOver = true;
                 IsComplete = true;
-                EndInit();
+                End();
             }
         }
 
         public void End()
         {
-            Background = Brushes.Red;
+            Background = Brushes.Yellow;
             CanClose = true;
         }
     }

@@ -26,24 +26,48 @@ namespace WindowSpam
 
         private void dispatcherTimer_Tick(object sender, EventArgs e) { }
 
-        private void spawnWindows()
+        private void SpawnWindows()
         {
-            int windowCount = Int16.Parse(WindowCounter.Text);
-            for(int i = 0; i < 3; i++)
+            int totalWindows = Int32.Parse(WindowCounter.Text);
+            int cut = totalWindows/3;
+            int sand = totalWindows/3;
+            int nums = totalWindows / 3;
+            if (totalWindows % 3 == 1) cut++;
+            else if (totalWindows % 3 == 2)
             {
-                
+                cut++;
+                sand++;
             }
-            CutWire x = new CutWire();
-            x.Show();
-            x.Start();
-            x.End();
-            x.Close();
+            PopulateMakeSandwich(sand);
+            PopulateCutWires(cut);
         }
-        
+
+        private void PopulateCutWires(int amount)
+        {
+            cutList = new List<CutWire>();
+            for (int i = 0; i < amount; i++)
+            {
+                CutWire x = new CutWire();
+                x.Show();
+                cutList.Add(x);
+            }
+        }
+
+        private void PopulateMakeSandwich(int amount)
+        {
+            sandList = new List<MakeSandwich>();
+            for (int i = 0; i < amount; i++)
+            {
+                MakeSandwich x = new MakeSandwich();
+                x.Show();
+                sandList.Add(x);
+            }
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            spawnWindows();
+            SpawnWindows();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
