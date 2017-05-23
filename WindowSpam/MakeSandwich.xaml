@@ -14,11 +14,12 @@
         <Button x:Name="lettuceButton" Content="Lettuce" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,277,0,0" Click="lettuceButton_Click"/>
         <Button x:Name="tomatoButton" Content="Tomato" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,222,0,0" Click="tomatoButton_Click"/>
         <Button x:Name="bottomBunButton" Content="Bottom Bun" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="409,114,0,0" Click="bottomBunButton_Click_1"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="145,10,0,0" FontSize="20"><Run Text="Make a BLT top to "/><Run Text="bottom"/></TextBlock>
+        <TextBlock x:Name="RulesText" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="145,10,0,0" FontSize="20"><Run Text="Make a BLT top to "/><Run Text="bottom"/></TextBlock>
         <Image x:Name="bottomBunPicture" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="100" Margin="44,267,0,0" Source="Images/BottomBun.jpg" RenderTransformOrigin="1.47,0.98"/>
         <Image x:Name="topBunPicture" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="178" Margin="10,37,0,0" Source="Images/6.jpg"/>
         <Image x:Name="lettucePicture" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="100" Margin="44,154,0,0" Source="Images/lettuce.jpg"/>
         <Image x:Name="baconPicture" HorizontalAlignment="Left" Height="65" VerticalAlignment="Top" Width="100" Margin="44,99,0,0" Source="Images/bacon.png"/>
+        <TextBox x:Name="GameOverText" HorizontalAlignment="Left" Height="56" TextWrapping="Wrap" Text="Game Over" VerticalAlignment="Top" Width="227" Margin="149,123,0,0" FontSize="40"/>
 
     </Grid>
 </Window>

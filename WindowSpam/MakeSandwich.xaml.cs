@@ -35,6 +35,9 @@ namespace WindowSpam
             tomatoPicture.Visibility = Visibility.Hidden;
             bottomBunPicture.Visibility = Visibility.Hidden;
 
+
+            GameOverText.Visibility = Visibility.Hidden;
+
             topBunButton.IsEnabled = true; 
             baconButton.IsEnabled = true;
             lettuceButton.IsEnabled = true;
@@ -60,6 +63,7 @@ namespace WindowSpam
             tomatoPicture.Visibility = Visibility.Hidden;
             bottomBunPicture.Visibility = Visibility.Hidden;
 
+            GameOverText.Visibility = Visibility.Hidden; 
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -70,6 +74,29 @@ namespace WindowSpam
         private void End()
         {
             canClose = true; 
+        }
+
+        private void GameOver()
+        {
+            topBunPicture.Visibility = Visibility.Hidden;
+            baconPicture.Visibility = Visibility.Hidden;
+            lettucePicture.Visibility = Visibility.Hidden;
+            tomatoPicture.Visibility = Visibility.Hidden;
+            bottomBunPicture.Visibility = Visibility.Hidden;
+
+            topBunButton.Visibility = Visibility.Hidden;
+            baconButton.Visibility = Visibility.Hidden;
+            lettuceButton.Visibility = Visibility.Hidden;
+            tomatoButton.Visibility = Visibility.Hidden;
+            bottomBunPicture.Visibility = Visibility.Hidden;
+
+            topBunButton.IsEnabled = false;
+            baconButton.IsEnabled = false;
+            lettuceButton.IsEnabled = false;
+            tomatoButton.IsEnabled = false;
+            bottomBunButton.IsEnabled = false;
+
+            RulesText.Visibility = Visibility.Hidden; 
         }
 
         private void topBunButton_Click(object sender, RoutedEventArgs e)
@@ -83,6 +110,7 @@ namespace WindowSpam
             }
             else
             {
+                GameOver(); 
                 SystemSounds.Beep.Play();
             }
 
@@ -99,6 +127,7 @@ namespace WindowSpam
             }
             else
             {
+                GameOver(); 
                 SystemSounds.Beep.Play();
             }
 
@@ -115,6 +144,7 @@ namespace WindowSpam
             }
             else
             {
+                GameOver(); 
                 SystemSounds.Beep.Play();
             }
         }
@@ -130,6 +160,7 @@ namespace WindowSpam
             }
             else
             {
+                GameOver(); 
                 SystemSounds.Beep.Play();
             }
         }
@@ -145,6 +176,7 @@ namespace WindowSpam
             }
             else
             {
+                GameOver(); 
                 SystemSounds.Beep.Play();
             }
         }
