@@ -20,15 +20,20 @@ namespace WindowSpam
     /// </summary>
     public partial class MakeSandwich : Window
     {
+        public static readonly int GameTime = 30;
         int counter;
-        bool canClose; 
-        
-        
-        public void Start()
+        bool canClose;
+        public bool IsGameOver;
+        public bool IsComplete;
+        public int EndTime;
+        public bool IsActive;
+        public void Start(int startTime)
         {
+            EndTime = GameTime + startTime;
             counter = 0;
-
-
+            IsGameOver = false;
+            IsComplete = false;
+            IsActive = true;
             topBunPicture.Visibility = Visibility.Hidden;
             baconPicture.Visibility = Visibility.Hidden;
             lettucePicture.Visibility = Visibility.Hidden;
@@ -48,8 +53,10 @@ namespace WindowSpam
 
         public MakeSandwich()
         {
-            canClose = false; 
-
+            IsGameOver = false;
+            IsComplete = false;
+            canClose = false;
+            IsActive = false;
             InitializeComponent();
             topBunButton.IsEnabled = false; 
             baconButton.IsEnabled = false;
@@ -66,17 +73,40 @@ namespace WindowSpam
             GameOverText.Visibility = Visibility.Hidden; 
         }
 
+        public void Update(int time)
+        {
+            if (!IsActive) return;
+            if (time > EndTime) IsGameOver = true;
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = !canClose;
         }
 
-        private void End()
+        public void End()
         {
             canClose = true; 
         }
 
-        private void GameOver()
+        public void Stop()
+        {
+            topBunButton.IsEnabled = false;
+            baconButton.IsEnabled = false;
+            lettuceButton.IsEnabled = false;
+            tomatoButton.IsEnabled = false;
+            bottomBunButton.IsEnabled = false;
+            IsActive = false;
+            topBunPicture.Visibility = Visibility.Hidden;
+            baconPicture.Visibility = Visibility.Hidden;
+            lettucePicture.Visibility = Visibility.Hidden;
+            tomatoPicture.Visibility = Visibility.Hidden;
+            bottomBunPicture.Visibility = Visibility.Hidden;
+
+            GameOverText.Visibility = Visibility.Hidden;
+        }
+
+        public void GameOver()
         {
             topBunPicture.Visibility = Visibility.Hidden;
             baconPicture.Visibility = Visibility.Hidden;
@@ -110,7 +140,8 @@ namespace WindowSpam
             }
             else
             {
-                GameOver(); 
+                IsGameOver = true;
+                IsComplete = true;
                 SystemSounds.Beep.Play();
             }
 
@@ -127,7 +158,8 @@ namespace WindowSpam
             }
             else
             {
-                GameOver(); 
+                IsGameOver = true;
+                IsComplete = true;
                 SystemSounds.Beep.Play();
             }
 
@@ -144,7 +176,8 @@ namespace WindowSpam
             }
             else
             {
-                GameOver(); 
+                IsGameOver = true;
+                IsComplete = true; 
                 SystemSounds.Beep.Play();
             }
         }
@@ -160,7 +193,8 @@ namespace WindowSpam
             }
             else
             {
-                GameOver(); 
+                IsGameOver = true;
+                IsComplete = true;
                 SystemSounds.Beep.Play();
             }
         }
@@ -173,10 +207,14 @@ namespace WindowSpam
                 counter++;
                 bottomBunButton.Visibility = Visibility.Hidden;
                 bottomBunPicture.Visibility = Visibility.Visible;
+                IsComplete = true;
+                Stop();
             }
             else
             {
-                GameOver(); 
+                IsGameOver = true;
+                IsComplete = true;
+                
                 SystemSounds.Beep.Play();
             }
         }

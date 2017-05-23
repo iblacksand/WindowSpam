@@ -21,13 +21,16 @@ namespace WindowSpam
     /// </summary>
     public partial class CutWire : Window
     {
-        public static readonly int GameTime = 10;
+        public static readonly int GameTime = 20;
         private int ToCut;
+        public bool IsActive;
         public bool IsComplete;
         public bool IsGameOver;
         public bool CanClose;
+        public int EndTime;
         public CutWire()
         {
+            IsActive = false;
             IsComplete = false;
             InitializeComponent();
             Background = Brushes.Yellow;
@@ -37,8 +40,16 @@ namespace WindowSpam
             greenWire.IsEnabled = false;
         }
 
-        public void Start()
+        public void Update(int time)
         {
+            if (!IsActive) return;
+            if (time > EndTime) IsGameOver = true;
+        }
+
+        public void Start(int startTime)
+        {
+            EndTime = GameTime + startTime;
+            IsActive = true;
             PopulateBoxes();
             IsComplete = false;
             Background = Brushes.Purple;

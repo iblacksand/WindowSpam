@@ -17,20 +17,22 @@ namespace WindowSpam
         private List<MakeSandwich> sandList;
         private int gameDelay;
         private int pauseTime;
-
         private int lastCut;
         private int lastNum;
         private int lastWire;
+
+        private int tick;
         //private List<>
         public MainWindow()
         {
             InitializeComponent();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
-            timer.Interval = new TimeSpan(0, 5, 0);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 5);
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            tick++;
             if (gameDelay > 0)
             {
                 gameDelay--;
