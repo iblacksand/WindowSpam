@@ -19,7 +19,9 @@ namespace WindowSpam
     /// </summary>
     public partial class OrderNumbers : Window
     {
-        int firstNum, secondNum, thirdNum, fourthNum, fifthNum, sixthNum, seventhNum; 
+        int firstNum, secondNum, thirdNum, fourthNum, fifthNum, sixthNum, seventhNum;
+
+       
 
         public OrderNumbers()
         {
@@ -39,6 +41,10 @@ namespace WindowSpam
             seventhNum = rnd.Next(1, 100000);
 
             InitialNumberTextBlock.Text = firstNum + ", " + secondNum + ", " + thirdNum + ", " + fourthNum + ", " + fifthNum + ", " + sixthNum + ", " + seventhNum; 
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 

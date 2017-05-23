@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="InitialNumberTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="519" Margin="0,52,0,0" TextAlignment="Center" FontSize="20" Height="52"/>
         <TextBlock x:Name="RulesTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Order the numbers from least to greatest. Don't forget the commas and spaces" VerticalAlignment="Top" Margin="0,10,0,0" Width="519" TextAlignment="Center" FontSize="14"/>
-        <TextBox x:Name="AnswerTextBlock" HorizontalAlignment="Left" Height="49" Margin="0,88.5,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="519" FontSize="20" BorderBrush="#FF000208" BorderThickness="3" TextAlignment="Center"/>
+        <TextBox x:Name="AnswerTextBlock" HorizontalAlignment="Left" Height="49" Margin="0,58.5,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="519" FontSize="20" BorderBrush="#FF000208" BorderThickness="3" TextAlignment="Center"/>
+        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="211,126.5,0,0" Grid.Row="1" IsDefault="True" Click="SubmitButton_Click"/>
     </Grid>
 </Window>
