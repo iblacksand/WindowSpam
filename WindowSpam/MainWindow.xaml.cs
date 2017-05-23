@@ -113,7 +113,9 @@ namespace WindowSpam
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SpawnWindows();
+            //SpawnWindows();
+            OrderNumbers x = new OrderNumbers();
+            x.Show();
             pauseTime = 15;
             gameDelay = pauseTime;
             
