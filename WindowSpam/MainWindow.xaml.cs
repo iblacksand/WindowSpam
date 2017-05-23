@@ -20,42 +20,71 @@ namespace WindowSpam
         private int lastCut;
         private int lastNum;
         private int lastWire;
-
+        private int score;
         private int tick;
+
+        private int lastGame;
         //private List<>
         public MainWindow()
         {
             InitializeComponent();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 5);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             tick++;
+	        bool endAll = false;
+            for (int i = 0; i < cutList.Count(); i++) cutList[i].Update(tick);
+            for (int i = 0; i < sandList.Count(); i++) sandList[i].Update(tick);
+            for (int i = 0; i < cutList.Count(); i++) if(cutList[i].IsGameOver) endAll = true;
+	        for(int i = 0; i < sandList.Count(); i++) if(sandList[i].IsGameOver) endAll = true;
+	        if(endAll){
+		        EndAll();
+		        return;
+	        }
             if (gameDelay > 0)
             {
                 gameDelay--;
                 return;
             }
+            DecideGame:
             Random rand = new Random();
             int nextGame = rand.Next(3);
+            if (lastGame == nextGame)
+            {
+                
+            }
             if (nextGame == 0)
             {
                 int nextWindow;
                 if (cutList.Count == 1)
                 {
+                    if(cutList[0].IsActive) goto DecideGame;
                     nextWindow = 0;
                 }
                 else
                 {
                     DecideWindow1:
                     nextWindow = rand.Next(cutList.Count);
-                    if (nextWindow == lastCut) goto DecideWindow1;
+                    if (nextWindow == lastCut) return;
                 }
-
+                CutWire x = cutList[nextWindow];
+                x.Start(tick);
             }
         }
+
+	private void EndAll(){
+		for(int i = 0; i < cutList.Count(); i++){
+			cutList[i].End();
+			cutList[i].Close();
+		}
+		for(int i = 0; i < sandList.Count(); i++){
+			sandList[i].End();
+			sandList[i].Close();
+		}
+	}
 
         private void SpawnWindows()
         {
@@ -95,7 +124,7 @@ namespace WindowSpam
             }
         }
 
-        private void end()
+        private void End()
         {
             timer.Stop();
             for (int i = 0; i < cutList.Count; i++)
@@ -116,7 +145,7 @@ namespace WindowSpam
             SpawnWindows();
             pauseTime = 15;
             gameDelay = pauseTime;
-            
+            score = 0;
         }
 
         public void start()
