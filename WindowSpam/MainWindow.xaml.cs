@@ -40,15 +40,33 @@ namespace WindowSpam
             for (int i = 0; i < sandList.Count(); i++) sandList[i].Update(tick);
             for (int i = 0; i < cutList.Count(); i++) if(cutList[i].IsGameOver) endAll = true;
 	        for(int i = 0; i < sandList.Count(); i++) if(sandList[i].IsGameOver) endAll = true;
-	        if(endAll){
+            if (endAll){
 		        EndAll();
 		        return;
 	        }
+            for (int i = 0; i < cutList.Count(); i++)
+            {
+                if (cutList[i].IsComplete)
+                {
+                    cutList[i].Stop();
+                    score++;
+                }
+            }
+            for(int i = 0; i < sandList.Count(); i++)
+            {
+                if (sandList[i].IsComplete)
+                {
+                    sandList[i].Stop();
+                    score++;
+                }
+            }
             if (gameDelay > 0)
             {
                 gameDelay--;
                 return;
             }
+            if (AllActive()) return;
+            
             DecideGame:
             Random rand = new Random();
             int nextGame = rand.Next(3);
@@ -73,6 +91,16 @@ namespace WindowSpam
                 CutWire x = cutList[nextWindow];
                 x.Start(tick);
             }
+            pauseTime--;
+            gameDelay = pauseTime;
+        }
+
+        private bool AllActive()
+        {
+            bool res = true;
+            foreach(CutWire x in cutList) res = res && x.IsActive;
+            foreach (MakeSandwich x in sandList) res = res && x.IsActive;
+            return res;
         }
 
 	private void EndAll(){
@@ -142,17 +170,16 @@ namespace WindowSpam
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //SpawnWindows();
-            OrderNumbers x = new OrderNumbers();
-            x.Show();
-            pauseTime = 15;
-            gameDelay = pauseTime;
-            score = 0;
+            start();
         }
 
         public void start()
         {
+            SpawnWindows();
             timer.Start();
+            score = 0;
+            pauseTime = 15;
+            gameDelay = pauseTime;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

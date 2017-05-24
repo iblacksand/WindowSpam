@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Media;
+using System.Security.Permissions;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +45,7 @@ namespace WindowSpam
         public void Update(int time)
         {
             if (!IsActive) return;
-            if (time > EndTime) IsGameOver = true;
+            if (time > EndTime + 1) IsGameOver = true;
         }
 
         public void Start(int startTime)
@@ -62,23 +64,28 @@ namespace WindowSpam
 
         public void PopulateBoxes()
         {
-            Random rand = new Random();
-            ToCut = rand.Next(0, 3);
-            String text = "";
-            switch (ToCut)
+            Random random = new Random();
+            object syncLock = new object();
+            lock (syncLock)
             {
-                case 0:
-                    text = "Cut the Blue Wire!";
-                    break;
-                case 2:
-                    text = "Cut the Red Wire!";
-                    break;
-                case 1:
-                    text = "Cut the Green Wire";
-                    break;
-                default:
-                    text = "ERROR: RANDOM NUMBER IS OUT OF BOUNDS";
-                    break;
+                ToCut = random.Next() % 3;
+            }
+            System.Diagnostics.Debug.WriteLine("To cut is:" + ToCut);
+            String text = "";
+            if (ToCut == 0)
+            {
+                text = "Cut the Blue Wire!";
+            }
+            else if (ToCut == 2) { 
+                text = "Cut the Red Wire!";
+            }
+            else if(ToCut == 1) {
+
+            text = "Cut the Green Wire";
+            }
+
+            else {
+                text = "ERROR: RANDOM NUMBER IS OUT OF BOUNDS";
             }
             wireMessage.Text = text;
         }
@@ -138,10 +145,12 @@ namespace WindowSpam
 
         public void Stop()
         {
+            IsActive = false;
             Background = Brushes.Yellow;
             RedWire.IsEnabled = false;
             blueWire.IsEnabled = false;
             greenWire.IsEnabled = false;
+            wireMessage.Text = "";
         }
     }
 }
