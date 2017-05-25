@@ -20,7 +20,7 @@ namespace WindowSpam
     /// </summary>
     public partial class MakeSandwich : Window
     {
-        public static readonly int GameTime = 30;
+        public static readonly int GameTime = 150;
         int counter;
         bool canClose;
         public bool IsGameOver;
@@ -29,11 +29,17 @@ namespace WindowSpam
         public bool IsActive;
         public void Start(int startTime)
         {
+            Background = Brushes.Purple;
             EndTime = GameTime + startTime;
             counter = 0;
             IsGameOver = false;
             IsComplete = false;
             IsActive = true;
+            topBunButton.Visibility = Visibility.Visible;
+            baconButton.Visibility = Visibility.Visible;
+            lettuceButton.Visibility = Visibility.Visible;
+            tomatoButton.Visibility = Visibility.Visible;
+            bottomBunButton.Visibility = Visibility.Visible;
             topBunPicture.Visibility = Visibility.Hidden;
             baconPicture.Visibility = Visibility.Hidden;
             lettucePicture.Visibility = Visibility.Hidden;
@@ -53,6 +59,7 @@ namespace WindowSpam
 
         public MakeSandwich()
         {
+            Background = Brushes.Yellow;
             IsGameOver = false;
             IsComplete = false;
             canClose = false;
@@ -102,7 +109,7 @@ namespace WindowSpam
             lettucePicture.Visibility = Visibility.Hidden;
             tomatoPicture.Visibility = Visibility.Hidden;
             bottomBunPicture.Visibility = Visibility.Hidden;
-
+            Background = Brushes.Yellow;
             GameOverText.Visibility = Visibility.Hidden;
         }
 
@@ -118,7 +125,7 @@ namespace WindowSpam
             baconButton.Visibility = Visibility.Hidden;
             lettuceButton.Visibility = Visibility.Hidden;
             tomatoButton.Visibility = Visibility.Hidden;
-            bottomBunPicture.Visibility = Visibility.Hidden;
+            bottomBunButton.Visibility = Visibility.Hidden;
 
             topBunButton.IsEnabled = false;
             baconButton.IsEnabled = false;

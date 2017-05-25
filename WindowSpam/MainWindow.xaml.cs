@@ -15,14 +15,15 @@ namespace WindowSpam
         System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
         private List<CutWire> cutList;
         private List<MakeSandwich> sandList;
+        private List<OrderNumbers> numList;
         private int gameDelay;
         private int pauseTime;
         private int lastCut;
         private int lastNum;
-        private int lastWire;
+        private int lastSand;
         private int score;
         private int tick;
-
+        private Random random;
         private int lastGame;
         //private List<>
         public MainWindow()
@@ -35,7 +36,23 @@ namespace WindowSpam
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             tick++;
-	        bool endAll = false;
+            for (int i = 0; i < cutList.Count(); i++)
+            {
+                if (cutList[i].IsComplete)
+                {
+                    cutList[i].Stop();
+                    score++;
+                }
+            }
+            for (int i = 0; i < sandList.Count(); i++)
+            {
+                if (sandList[i].IsComplete)
+                {
+                    sandList[i].Stop();
+                    score++;
+                }
+            }
+            bool endAll = false;
             for (int i = 0; i < cutList.Count(); i++) cutList[i].Update(tick);
             for (int i = 0; i < sandList.Count(); i++) sandList[i].Update(tick);
             for (int i = 0; i < cutList.Count(); i++) if(cutList[i].IsGameOver) endAll = true;
@@ -68,7 +85,6 @@ namespace WindowSpam
             if (AllActive()) return;
             
             DecideGame:
-            Random random = new Random();
             object syncLock = new object();
             int nextGame;
             lock (syncLock)
@@ -95,12 +111,57 @@ namespace WindowSpam
                     {
                         nextWindow = random.Next() % 3;
                     }
-                    nextWindow
                     if (nextWindow == lastCut) return;
                 }
                 CutWire x = cutList[nextWindow];
                 x.Start(tick);
+                lastCut = nextWindow;
             }
+            if (nextGame == 1)
+            {
+                int nextWindow;
+                if (sandList.Count == 1)
+                {
+                    if (sandList[0].IsActive) goto DecideGame;
+                    nextWindow = 0;
+                }
+                else
+                {
+                    DecideWindow1:
+                    object syncLoc = new object();
+                    lock (syncLoc)
+                    {
+                        nextWindow = random.Next() % 3;
+                    }
+                    if (nextWindow == lastSand) return;
+                }
+                MakeSandwich x = sandList[nextWindow];
+                x.Start(tick);
+                lastSand = nextWindow;
+            }
+            if (nextGame == 2)
+            {
+                int nextWindow;
+                if (numbList.Count == 1)
+                {
+                    if (sandList[0].IsActive) goto DecideGame;
+                    nextWindow = 0;
+                }
+                else
+                {
+                    DecideWindow1:
+                    object syncLoc = new object();
+                    lock (syncLoc)
+                    {
+                        nextWindow = random.Next() % 3;
+                    }
+                    if (nextWindow == lastSand) return;
+                }
+                MakeSandwich x = sandList[nextWindow];
+                x.Start(tick);
+                lastSand = nextWindow;
+            }
+            lastGame = nextGame;
             pauseTime--;
             gameDelay = pauseTime;
         }
@@ -113,16 +174,18 @@ namespace WindowSpam
             return res;
         }
 
-	private void EndAll(){
-		for(int i = 0; i < cutList.Count(); i++){
-			cutList[i].End();
-			cutList[i].Close();
-		}
-		for(int i = 0; i < sandList.Count(); i++){
-			sandList[i].End();
-			sandList[i].Close();
-		}
-	}
+	    private void EndAll(){
+		    for(int i = 0; i < cutList.Count(); i++){
+			    cutList[i].End();
+			    cutList[i].Close();
+		    }
+		    for(int i = 0; i < sandList.Count(); i++){
+			    sandList[i].End();
+			    sandList[i].Close();
+		    }
+	        lastScoreBlock.Text = "Last Score: " + score;
+            timer.Stop();
+        }
 
         private void SpawnWindows()
         {
@@ -138,6 +201,7 @@ namespace WindowSpam
             }
             PopulateMakeSandwich(sand);
             PopulateCutWires(cut);
+            PopulateOrderNumbers(nums);
         }
 
         private void PopulateCutWires(int amount)
@@ -148,6 +212,17 @@ namespace WindowSpam
                 CutWire x = new CutWire();
                 x.Show();
                 cutList.Add(x);
+            }
+        }
+
+        private void PopulateOrderNumbers(int amount)
+        {
+            numList = new List<OrderNumbers>();
+            for (int i = 0; i < amount; i++)
+            {
+                OrderNumbers x = new OrderNumbers();
+                x.Show();
+                numList.Add(x);
             }
         }
 
@@ -176,6 +251,8 @@ namespace WindowSpam
                 sandList[i].End();
                 sandList[i].Close();
             }
+
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -188,7 +265,7 @@ namespace WindowSpam
             SpawnWindows();
             timer.Start();
             score = 0;
-            pauseTime = 15;
+            pauseTime = 50;
             gameDelay = pauseTime;
         }
 

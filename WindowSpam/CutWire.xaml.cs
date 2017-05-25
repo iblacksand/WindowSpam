@@ -30,9 +30,11 @@ namespace WindowSpam
         public bool IsGameOver;
         public bool CanClose;
         public int EndTime;
+        private Random random;
         public CutWire()
         {
             IsActive = false;
+            random = new Random();
             IsComplete = false;
             InitializeComponent();
             Background = Brushes.Yellow;
@@ -64,7 +66,6 @@ namespace WindowSpam
 
         public void PopulateBoxes()
         {
-            Random random = new Random();
             object syncLock = new object();
             lock (syncLock)
             {
