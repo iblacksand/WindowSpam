@@ -208,7 +208,6 @@ namespace WindowSpam
                 bottomBunButton.Visibility = Visibility.Hidden;
                 bottomBunPicture.Visibility = Visibility.Visible;
                 IsComplete = true;
-                Stop();
             }
             else
             {

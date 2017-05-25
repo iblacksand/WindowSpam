@@ -68,11 +68,16 @@ namespace WindowSpam
             if (AllActive()) return;
             
             DecideGame:
-            Random rand = new Random();
-            int nextGame = rand.Next(3);
+            Random random = new Random();
+            object syncLock = new object();
+            int nextGame;
+            lock (syncLock)
+            {
+                nextGame = random.Next() % 3;
+            }
             if (lastGame == nextGame)
             {
-                
+                goto DecideGame;
             }
             if (nextGame == 0)
             {
@@ -85,7 +90,12 @@ namespace WindowSpam
                 else
                 {
                     DecideWindow1:
-                    nextWindow = rand.Next(cutList.Count);
+                    object syncLoc = new object();
+                    lock (syncLoc)
+                    {
+                        nextWindow = random.Next() % 3;
+                    }
+                    nextWindow
                     if (nextWindow == lastCut) return;
                 }
                 CutWire x = cutList[nextWindow];
