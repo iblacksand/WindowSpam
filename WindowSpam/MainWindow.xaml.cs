@@ -198,7 +198,12 @@ namespace WindowSpam
 			    sandList[i].End();
 			    sandList[i].Close();
 		    }
-	        lastScoreBlock.Text = "Last Score: " + score;
+	        for (int i = 0; i < numList.Count(); i++)
+	        {
+	            numList[i].End();
+	            numList[i].Close();
+	        }
+            lastScoreBlock.Text = "Last Score: " + score;
             timer.Stop();
         }
 

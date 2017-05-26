@@ -29,10 +29,11 @@ namespace WindowSpam
         public bool IsActive;
         public bool IsGameOver;
         public bool IsComplete;
-
+        public bool CanClose;
         private Random rnd;
         public OrderNumbers()
         {
+            CanClose = false;
             rnd = new Random();
             InitializeComponent();
             Background = Brushes.Yellow;
@@ -68,6 +69,11 @@ namespace WindowSpam
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsActive)
+            {
+                AnswerTextBlock.Text = "";
+                return;
+            }
             if (AnswerTextBlock.Text == "") return;
             if (!AnswerTextBlock.Text.Equals(correct))
             {
@@ -86,6 +92,16 @@ namespace WindowSpam
             InitialNumberTextBlock.Text = "";
             Background = Brushes.Yellow;
             AnswerTextBlock.Text = "";
+        }
+
+        public void End()
+        {
+            CanClose = true;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !CanClose;
         }
 
     }
