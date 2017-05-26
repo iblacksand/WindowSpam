@@ -1,0 +1,17 @@
+﻿<Window x:Class="WindowSpam.WordGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WindowSpam"
+        mc:Ignorable="d"
+        Title="WordGame" Height="350" Width="525" ResizeMode="CanMinimize" Closing="Window_Closing">
+	<Grid>
+		<TextBlock x:Name="TitleBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,2,0,0" Width="518" Height="46" FontSize="16" TextAlignment="Center"><Run Text="Create a new word with the word starting with the last word given below"/></TextBlock>
+		<TextBlock x:Name="GivenBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="0,97,0,0" FontSize="36" TextAlignment="Center" Width="518"/>
+		<TextBox x:Name="AnswerBox" HorizontalAlignment="Left" Height="39" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="508" Margin="0,248,0,0" FontSize="24" TextAlignment="Center" SpellCheck.IsEnabled="True" KeyDown="AnswerBox_KeyDown"/>
+		<Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="208,292,0,0" IsDefault="True" Click="SubmitButton_Click" Height="24"/>
+
+
+	</Grid>
+</Window>

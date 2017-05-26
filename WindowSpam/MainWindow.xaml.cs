@@ -25,6 +25,9 @@ namespace WindowSpam
         private int tick;
         private Random random;
         private int lastGame;
+        private List<WordGame> wordList;
+        private int lastWord;
+
         //private List<>
         public MainWindow()
         {
@@ -56,9 +59,11 @@ namespace WindowSpam
             bool endAll = false;
             for (int i = 0; i < cutList.Count(); i++) cutList[i].Update(tick);
             for (int i = 0; i < sandList.Count(); i++) sandList[i].Update(tick);
+            for (int i = 0; i < wordList.Count(); i++) wordList[i].Update(tick);
             for (int i = 0; i < numList.Count(); i++) numList[i].update(tick);
             for (int i = 0; i < cutList.Count(); i++) if(cutList[i].IsGameOver) endAll = true;
 	        for(int i = 0; i < sandList.Count(); i++) if(sandList[i].IsGameOver) endAll = true;
+            for (int i = 0; i < wordList.Count(); i++) if (wordList[i].IsGameOver) endAll = true;
             for (int i = 0; i < numList.Count(); i++) if (numList[i].IsGameOver) endAll = true;
             if (endAll){
 		        EndAll();
@@ -88,6 +93,14 @@ namespace WindowSpam
                     score++;
                 }
             }
+            for (int i = 0; i < wordList.Count(); i++)
+            {
+                if (wordList[i].IsComplete)
+                {
+                    wordList[i].Stop();
+                    score++;
+                }
+            }
             if (gameDelay > 0)
             {
                 gameDelay--;
@@ -100,7 +113,7 @@ namespace WindowSpam
             int nextGame = -1;
             lock (syncLock)
             {
-                nextGame = random.Next() % 3;
+                nextGame = random.Next() % 4;
             }
             if (lastGame == nextGame)
             {
@@ -154,6 +167,7 @@ namespace WindowSpam
             }
             if (nextGame == 2)
             {
+                if (numList.Count == 0) return;
                 int nextWindow;
                 if (numList.Count == 1)
                 {
@@ -176,6 +190,30 @@ namespace WindowSpam
 
                 lastNum = nextWindow;
             }
+            if (nextGame == 3)
+            {
+                int nextWindow;
+                if (wordList.Count == 1)
+                {
+                    if (wordList[0].IsActive) goto DecideGame;
+                    nextWindow = 0;
+                }
+                else
+                {
+                    DecideWindow1:
+                    object syncLoc = new object();
+                    lock (syncLoc)
+                    {
+                        nextWindow = random.Next() % wordList.Count;
+                    }
+                    if (nextWindow == lastWord) return;
+                }
+                WordGame x = wordList[nextWindow];
+                if (x.IsActive) return;
+                x.Start(tick);
+
+                lastNum = nextWindow;
+            }
             lastGame = nextGame;
             pauseTime -= 2;
             gameDelay = pauseTime;
@@ -186,6 +224,8 @@ namespace WindowSpam
             bool res = true;
             foreach(CutWire x in cutList) res = res && x.IsActive;
             foreach (MakeSandwich x in sandList) res = res && x.IsActive;
+            foreach (OrderNumbers x in numList) res = res && x.IsActive;
+            foreach (WordGame x in wordList) res = res && x.IsActive;
             return res;
         }
 
@@ -203,6 +243,11 @@ namespace WindowSpam
 	            numList[i].End();
 	            numList[i].Close();
 	        }
+	        for (int i = 0; i < wordList.Count(); i++)
+	        {
+	            wordList[i].End();
+	            wordList[i].Close();
+	        }
             lastScoreBlock.Text = "Last Score: " + score;
             timer.Stop();
         }
@@ -210,18 +255,37 @@ namespace WindowSpam
         private void SpawnWindows()
         {
             int totalWindows = Int32.Parse(WindowCounter.Text);
-            int cut = totalWindows/3;
-            int sand = totalWindows/3;
-            int nums = totalWindows / 3;
-            if (totalWindows % 3 == 1) cut++;
-            else if (totalWindows % 3 == 2)
+            int cut = totalWindows/4;
+            int sand = totalWindows/4;
+            int nums = totalWindows / 4;
+            int words = totalWindows / 4;
+            if (totalWindows % 4 == 1) cut++;
+            else if (totalWindows % 4 == 2)
             {
                 cut++;
                 sand++;
             }
+            else if (totalWindows % 4 == 3)
+            {
+                cut++;
+                sand++;
+                words++;
+            }
             PopulateMakeSandwich(sand);
             PopulateCutWires(cut);
             PopulateOrderNumbers(nums);
+            PopulateWordGames(words);
+        }
+
+        private void PopulateWordGames(int amount)
+        {
+            wordList = new List<WordGame>();
+            for (int i = 0; i < amount; i++)
+            {
+                WordGame x = new WordGame();
+                x.Show();
+                wordList.Add(x);
+            }
         }
 
         private void PopulateCutWires(int amount)

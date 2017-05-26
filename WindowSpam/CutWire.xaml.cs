@@ -23,7 +23,7 @@ namespace WindowSpam
     /// </summary>
     public partial class CutWire : Window
     {
-        public static readonly int GameTime = 50;
+        public static readonly int GameTime = 17;
         private int ToCut;
         public bool IsActive;
         public bool IsComplete;
