@@ -22,7 +22,7 @@ namespace WindowSpam
     /// </summary>
     public partial class WordGame : Window
     {
-        private int GameTime = 60;
+        private int GameTime = 80;
         private int EndTime;
         public bool CanClose;
         public bool IsActive;
