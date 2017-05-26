@@ -20,7 +20,7 @@ namespace WindowSpam
     /// </summary>
     public partial class MakeSandwich : Window
     {
-        public static readonly int GameTime = 15000;
+        public static readonly int GameTime = 120;
         int counter;
         bool canClose;
         public bool IsGameOver;

@@ -21,7 +21,7 @@ namespace WindowSpam
     /// </summary>
     public partial class OrderNumbers : Window
     {
-        public int GameTime = 15000;
+        public int GameTime = 500;
         public int EndTime;
         int firstNum, secondNum, thirdNum, fourthNum;
         private int[] nums;
@@ -46,8 +46,8 @@ namespace WindowSpam
 
         public void start(int StartTime)
         {
-            EndTime = StartTime + EndTime;
-            IsActive = false;
+            EndTime = StartTime + GameTime;
+            IsActive = true;
             IsComplete = false;
             IsGameOver = false;
             generateAndFillRandomNumbers();
@@ -68,19 +68,11 @@ namespace WindowSpam
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            String[] numsAsStrings = AnswerTextBlock.Text.Split(' ');
-            int[] givenInts = new int[numsAsStrings.Length];
-            int c = 0;
-            foreach (String str in numsAsStrings)
-            {
-                givenInts[c] = Int32.Parse(str.Substring(0, str.Length - 1));
-                c++;
-            }
-            if (givenInts.Length != nums.Length)
+            if (AnswerTextBlock.Text == "") return;
+            if (!AnswerTextBlock.Text.Equals(correct))
             {
                 IsGameOver = true;
             }
-            if (!AnswerTextBlock.Text.Equals(correct)) IsGameOver = true;
             else
             {
                 IsComplete = true;

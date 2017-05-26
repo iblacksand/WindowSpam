@@ -23,7 +23,7 @@ namespace WindowSpam
     /// </summary>
     public partial class CutWire : Window
     {
-        public static readonly int GameTime = 10000;
+        public static readonly int GameTime = 50;
         private int ToCut;
         public bool IsActive;
         public bool IsComplete;
@@ -57,8 +57,6 @@ namespace WindowSpam
             PopulateBoxes();
             IsComplete = false;
             Background = Brushes.Purple;
-            SoundPlayer player = new SoundPlayer(@"Sounds\ding.wav");
-            player.PlaySync();
             RedWire.IsEnabled = true;
             blueWire.IsEnabled = true;
             greenWire.IsEnabled = true;

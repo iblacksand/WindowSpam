@@ -177,7 +177,7 @@ namespace WindowSpam
                 lastNum = nextWindow;
             }
             lastGame = nextGame;
-            pauseTime--;
+            pauseTime -= 2;
             gameDelay = pauseTime;
         }
 
