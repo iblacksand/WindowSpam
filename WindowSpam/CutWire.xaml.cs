@@ -23,7 +23,7 @@ namespace WindowSpam
     /// </summary>
     public partial class CutWire : Window
     {
-        public static readonly int GameTime = 20;
+        public static readonly int GameTime = 10000;
         private int ToCut;
         public bool IsActive;
         public bool IsComplete;
@@ -133,7 +133,6 @@ namespace WindowSpam
             else
             {
                 IsGameOver = true;
-                IsComplete = true;
                 End();
             }
         }
@@ -147,6 +146,7 @@ namespace WindowSpam
         public void Stop()
         {
             IsActive = false;
+            IsComplete = false;
             Background = Brushes.Yellow;
             RedWire.IsEnabled = false;
             blueWire.IsEnabled = false;

@@ -21,10 +21,11 @@ namespace WindowSpam
     /// </summary>
     public partial class OrderNumbers : Window
     {
-        public int GameTime;
+        public int GameTime = 15000;
         public int EndTime;
-        int firstNum, secondNum, thirdNum, fourthNum, fifthNum, sixthNum, seventhNum;
+        int firstNum, secondNum, thirdNum, fourthNum;
         private int[] nums;
+        private String correct;
         public bool IsActive;
         public bool IsGameOver;
         public bool IsComplete;
@@ -34,6 +35,7 @@ namespace WindowSpam
         {
             rnd = new Random();
             InitializeComponent();
+            Background = Brushes.Yellow;
         }
 
         public void update(int time)
@@ -47,21 +49,21 @@ namespace WindowSpam
             EndTime = StartTime + EndTime;
             IsActive = false;
             IsComplete = false;
+            IsGameOver = false;
             generateAndFillRandomNumbers();
+            Background = Brushes.Purple;
         }
 
         private void generateAndFillRandomNumbers()
         {
-            firstNum = rnd.Next(1, 100000);
-            secondNum = rnd.Next(1, 100000);
-            thirdNum = rnd.Next(1, 100000);
-            fourthNum = rnd.Next(1, 100000);
-            fifthNum = rnd.Next(1, 100000);
-            sixthNum = rnd.Next(1, 100000);
-            seventhNum = rnd.Next(1, 100000);
-            nums = new int[] {firstNum, secondNum, thirdNum, fourthNum, fifthNum, sixthNum, seventhNum};
+            firstNum = rnd.Next(1, 1000);
+            secondNum = rnd.Next(1, 1000);
+            thirdNum = rnd.Next(1, 1000);
+            fourthNum = rnd.Next(1, 1000);
+            nums = new int[] {firstNum, secondNum, thirdNum, fourthNum};
             Array.Sort(nums);
-            InitialNumberTextBlock.Text = firstNum + ", " + secondNum + ", " + thirdNum + ", " + fourthNum + ", " + fifthNum + ", " + sixthNum + ", " + seventhNum; 
+            correct = nums[0] + ", " + nums[1] + ", " + nums[2] + ", " + nums[3];
+            InitialNumberTextBlock.Text = firstNum + ", " + secondNum + ", " + thirdNum + ", " + fourthNum ; 
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -78,12 +80,7 @@ namespace WindowSpam
             {
                 IsGameOver = true;
             }
-            bool isEqual = true;
-            for (int i = 0; i < givenInts.Length; i++)
-            {
-                isEqual = isEqual && (givenInts[i] == nums[i]);
-            }
-            if (!isEqual) IsGameOver = true;
+            if (!AnswerTextBlock.Text.Equals(correct)) IsGameOver = true;
             else
             {
                 IsComplete = true;
@@ -93,7 +90,10 @@ namespace WindowSpam
         public void Stop()
         {
             IsActive = false;
+            IsComplete = false;
             InitialNumberTextBlock.Text = "";
+            Background = Brushes.Yellow;
+            AnswerTextBlock.Text = "";
         }
 
     }

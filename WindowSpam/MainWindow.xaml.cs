@@ -28,6 +28,7 @@ namespace WindowSpam
         //private List<>
         public MainWindow()
         {
+            random = new Random();
             InitializeComponent();
             timer.Tick += new EventHandler(dispatcherTimer_Tick);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
@@ -55,8 +56,10 @@ namespace WindowSpam
             bool endAll = false;
             for (int i = 0; i < cutList.Count(); i++) cutList[i].Update(tick);
             for (int i = 0; i < sandList.Count(); i++) sandList[i].Update(tick);
+            for (int i = 0; i < numList.Count(); i++) numList[i].update(tick);
             for (int i = 0; i < cutList.Count(); i++) if(cutList[i].IsGameOver) endAll = true;
 	        for(int i = 0; i < sandList.Count(); i++) if(sandList[i].IsGameOver) endAll = true;
+            for (int i = 0; i < numList.Count(); i++) if (numList[i].IsGameOver) endAll = true;
             if (endAll){
 		        EndAll();
 		        return;
@@ -77,6 +80,14 @@ namespace WindowSpam
                     score++;
                 }
             }
+            for (int i = 0; i < numList.Count(); i++)
+            {
+                if (numList[i].IsComplete)
+                {
+                    numList[i].Stop();
+                    score++;
+                }
+            }
             if (gameDelay > 0)
             {
                 gameDelay--;
@@ -86,7 +97,7 @@ namespace WindowSpam
             
             DecideGame:
             object syncLock = new object();
-            int nextGame;
+            int nextGame = -1;
             lock (syncLock)
             {
                 nextGame = random.Next() % 3;
@@ -109,11 +120,12 @@ namespace WindowSpam
                     object syncLoc = new object();
                     lock (syncLoc)
                     {
-                        nextWindow = random.Next() % 3;
+                        nextWindow = random.Next() % cutList.Count;
                     }
                     if (nextWindow == lastCut) return;
                 }
                 CutWire x = cutList[nextWindow];
+                if (x.IsActive) return;
                 x.Start(tick);
                 lastCut = nextWindow;
             }
@@ -131,20 +143,21 @@ namespace WindowSpam
                     object syncLoc = new object();
                     lock (syncLoc)
                     {
-                        nextWindow = random.Next() % 3;
+                        nextWindow = random.Next() % sandList.Count;
                     }
                     if (nextWindow == lastSand) return;
                 }
                 MakeSandwich x = sandList[nextWindow];
+                if (x.IsActive) return;
                 x.Start(tick);
                 lastSand = nextWindow;
             }
             if (nextGame == 2)
             {
                 int nextWindow;
-                if (numbList.Count == 1)
+                if (numList.Count == 1)
                 {
-                    if (sandList[0].IsActive) goto DecideGame;
+                    if (numList[0].IsActive) goto DecideGame;
                     nextWindow = 0;
                 }
                 else
@@ -153,13 +166,15 @@ namespace WindowSpam
                     object syncLoc = new object();
                     lock (syncLoc)
                     {
-                        nextWindow = random.Next() % 3;
+                        nextWindow = random.Next() % numList.Count;
                     }
-                    if (nextWindow == lastSand) return;
+                    if (nextWindow == lastNum) return;
                 }
-                MakeSandwich x = sandList[nextWindow];
-                x.Start(tick);
-                lastSand = nextWindow;
+                OrderNumbers x = numList[nextWindow];
+                if (x.IsActive) return;
+                x.start(tick);
+
+                lastNum = nextWindow;
             }
             lastGame = nextGame;
             pauseTime--;
@@ -265,7 +280,7 @@ namespace WindowSpam
             SpawnWindows();
             timer.Start();
             score = 0;
-            pauseTime = 50;
+            pauseTime = 100;
             gameDelay = pauseTime;
         }
 

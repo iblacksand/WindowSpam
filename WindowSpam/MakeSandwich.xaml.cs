@@ -20,7 +20,7 @@ namespace WindowSpam
     /// </summary>
     public partial class MakeSandwich : Window
     {
-        public static readonly int GameTime = 150;
+        public static readonly int GameTime = 15000;
         int counter;
         bool canClose;
         public bool IsGameOver;
@@ -104,6 +104,7 @@ namespace WindowSpam
             tomatoButton.IsEnabled = false;
             bottomBunButton.IsEnabled = false;
             IsActive = false;
+            IsComplete = false;
             topBunPicture.Visibility = Visibility.Hidden;
             baconPicture.Visibility = Visibility.Hidden;
             lettucePicture.Visibility = Visibility.Hidden;
@@ -148,7 +149,6 @@ namespace WindowSpam
             else
             {
                 IsGameOver = true;
-                IsComplete = true;
                 SystemSounds.Beep.Play();
             }
 
@@ -166,7 +166,6 @@ namespace WindowSpam
             else
             {
                 IsGameOver = true;
-                IsComplete = true;
                 SystemSounds.Beep.Play();
             }
 
@@ -184,7 +183,6 @@ namespace WindowSpam
             else
             {
                 IsGameOver = true;
-                IsComplete = true; 
                 SystemSounds.Beep.Play();
             }
         }
@@ -201,7 +199,6 @@ namespace WindowSpam
             else
             {
                 IsGameOver = true;
-                IsComplete = true;
                 SystemSounds.Beep.Play();
             }
         }
@@ -219,7 +216,6 @@ namespace WindowSpam
             else
             {
                 IsGameOver = true;
-                IsComplete = true;
                 
                 SystemSounds.Beep.Play();
             }
